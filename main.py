@@ -111,7 +111,7 @@ def main():
         
         if user_input.lower() == "search":#Search for a producut
             search_string = input("What would you like to search for? \n").lower()
-            products = search(driver, get_url(search_string), products)
+            products = search(driver, get_url(search_string))
         
         if user_input.lower() == "compare":
             if len(products) == 0:
