@@ -33,7 +33,7 @@ def process_products(products, results) -> None: #Processes the HTML returned an
         
         productVar = product(item)
         
-        if getattr(productVar, "price", None) == None:
+        if getattr(productVar, "listable", None) == None:
             continue
         
         count += 1

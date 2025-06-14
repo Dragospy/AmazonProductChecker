@@ -16,6 +16,9 @@ def compare_products(driver, products) -> None:
             product_2_index = ""
             
     product_1_index, product_2_index = int(product_1_index), int(product_2_index)
+    
+    product_specs = [{}, {}]
+    index_tracker = 0
 
     
     for i in [product_1_index, product_2_index]:
@@ -25,9 +28,19 @@ def compare_products(driver, products) -> None:
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         results = soup.find("table", {'id': 'productDetails_techSpec_section_1'})
         
-        brand_name = results.find_all('tr')[0].find('th').text
-        brand__name_text = results.find_all('tr')[0].find('td').text
-        print(brand_name.strip(), brand__name_text.strip())
+        specifications = results.find_all('tr')
+        for spec in specifications:
+            spec_name = (spec.find('th').text).strip()
+            spec_data = (spec.find('td').text).strip()
+            
+            product_specs[index_tracker][spec_name] = spec_data
+        
+        index_tracker += 1
+    
+        
+    for index, (key, value) in enumerate(product_specs[0].items()):
+        print(f'{key}:\n {product_1_index} -> {value}\n {product_2_index} -> {"No Comparable Data Listed" if (key not in product_specs[1]) else product_specs[1][key]}')
+        print("")
     
     
     return
