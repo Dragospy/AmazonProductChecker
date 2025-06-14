@@ -8,7 +8,7 @@ So I thought, what is something that really annoys me? And browsing amazon and c
 Therefore, I made<sup>*</sup> this.
 
 # Dependencies & Installation
-This was built using Python 3.12.8, but it should work with newer versions aswell. So use version 3.9.10 and up
+This was built using Python 3.12.8, but it should work with newer versions aswell. So use version 3.12.8 and up
 
 I recommend making a virtual environment when using this, though it is not necessary.
 
