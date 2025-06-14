@@ -1,4 +1,4 @@
-# Amazon Product Searcher
+# Amazon Product Finder
 - Creator: Dragospy (aka W4TCH3R)
 
 # Why did I make this?
