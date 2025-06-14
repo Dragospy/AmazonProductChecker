@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from os import system
 
 attributes = ['rating', 'name', 'price'] #attributes of the product class
+link_end = 'co.uk'
 
 class product:
     def __init__(self, item) -> None:
@@ -12,7 +13,7 @@ class product:
         rating_container = item.find("i", {'data-cy': 'reviews-ratings-slot'})
         self.rating = rating_container.find("span").text[:3] #Rating cannot be bigger than 3 characters
 
-        self.link = 'https://www.amazon.co.uk/dp/'+item['data-asin']
+        self.link = f'https://www.amazon.{link_end}/dp/{item['data-asin']}'
         
         price_container = item.find("div", {'data-cy': 'price-recipe'})
         if len(price_container.find_all("span")) < 2:
@@ -72,7 +73,7 @@ def sort_check(products) -> None:
     
 
 def search(driver, search_query):#takes the processed user query and gets every search result on the first page, then lists every item found
-    url = f'https://www.amazon.co.uk/s?k={search_query}'
+    url = f'https://www.amazon.{link_end}/s?k={search_query}'
     
     driver.get(url)
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
