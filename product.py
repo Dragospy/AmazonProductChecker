@@ -18,3 +18,8 @@ class product:
         self.price = price_container.find("span", {'class': 'a-offscreen'}).text
         
         self.listable = True
+
+def list_products(products):
+    for i in range(len(products)):
+        item = products[i]
+        print(f"{i+1}. Name: {item.name} \nPrice: {item.price} \nRating: {item.rating}/5 \nLink: {item.link} \n ")

@@ -36,9 +36,15 @@ If you choose to search for a product, then you will get asked what you want to 
 Once you type that in, you will then get asked how you would like your items to be sorted.
 
 ## Compare
-working on this still...
+Allows you to compare the specs of two products.
+
+First, you select a product from the list of the previously searched products.
+Then you select a 2nd product to compare against the 1st one (cannot be the same product).
+
+This will then list all of the technical details of the 1st product, and also the comparable details of the 2nd product.
 
 
 
 
-*Refers to the fact that its still in the works...
+
+**Refers to the fact that its still in the works...*

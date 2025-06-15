@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from product import product
+from product import product, list_products
 from os import system
 
 attributes = ['rating', 'name', 'price'] #attributes of the product class
@@ -59,7 +59,12 @@ def search_products(driver, search_query):#takes the processed user query and ge
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     
     soup = BeautifulSoup(driver.page_source, 'html.parser')
+    
     results = soup.find_all("div", {'data-component-type': 's-search-result'})
+    
+    if not results:
+        print("Failed to fetch product details, please try again later")
+        return
     
     products = []
     
@@ -69,8 +74,6 @@ def search_products(driver, search_query):#takes the processed user query and ge
             
     system("clear||cls")
     
-    for i in range(len(products)):
-        item = products[i]
-        print(f"{i+1}. Name: {item.name} \nPrice: {item.price} \nRating: {item.rating}/5 \nLink: {item.link} \n ")
+    list_products(products)
     
     return products

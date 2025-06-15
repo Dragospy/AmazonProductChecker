@@ -1,7 +1,14 @@
 from bs4 import BeautifulSoup
 from config import *
+import time
+from os import system
+from product import list_products
 
 def compare_products(driver, products) -> None:
+    system("clear||cls")
+    
+    list_products(products)
+    
     product_1_index = ""
     
     while not product_1_index.isdigit():
@@ -19,14 +26,25 @@ def compare_products(driver, products) -> None:
     
     product_specs = [{}, {}]
     index_tracker = 0
-
     
+    
+    print("\nFetching products (Fetching is delayed to prevent Amazon bot detection)")
+
     for i in [product_1_index, product_2_index]:
+        print(f"Fetching product {i}")
+        
+        time.sleep(2)
+        
         driver.get(products[i].link)
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         
         soup = BeautifulSoup(driver.page_source, 'html.parser')
+        
         results = soup.find("table", {'id': 'productDetails_techSpec_section_1'})
+        
+        if not results:
+            print("Failed to fetch product details, please try again later.")
+            return
         
         specifications = results.find_all('tr')
         for spec in specifications:
@@ -37,7 +55,10 @@ def compare_products(driver, products) -> None:
         
         index_tracker += 1
     
-        
+    system("clear||cls")
+    
+    print(f"Product {product_1_index} link: {products[product_1_index].link} \nProduct {product_2_index} link: {products[product_2_index].link} \n")
+    
     for index, (key, value) in enumerate(product_specs[0].items()):
         print(f'{key}:\n {product_1_index} -> {value}\n {product_2_index} -> {"No Comparable Data Listed" if (key not in product_specs[1]) else product_specs[1][key]}')
         print("")
